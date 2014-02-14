@@ -70,7 +70,11 @@ def _calculate_ci(p,sigma,n):
     confidence_levels = diff_Bk_Bj[j_selection-1,k_selection-1]
     # All confidence intervals and their confidence level
     return (j_selection,k_selection,confidence_levels)
-    
+
+def _percentile_indices(p,n):
+    k_p = np.floor(p*n + (1-p))
+    k_pp = np.ceil(p*n + (1-p))
+    return (k_p,k_pp)
 
 def _filter_ci(p,n,j_selection,k_selection,confidence_levels):
     """Return index j and k that correspond to confidence interval of
@@ -91,8 +95,7 @@ def _filter_ci(p,n,j_selection,k_selection,confidence_levels):
     # Now, to keep only the one that is as symmetric as possible
     # around the percentile indices. Calculate the indices for
     # selecting the percentile value
-    k_p = np.floor(p*n + (1-p))
-    k_pp = np.ceil(p*n + (1-p))
+    k_p,k_pp = _percentile_indices(p,n)
     index_best_interval = np.argmin(np.abs((k_p-j_selection)-(k_selection-k_pp)))
     # print(k_p,k_pp)
     # print((k_p-j_selection),(k_selection-k_pp))
