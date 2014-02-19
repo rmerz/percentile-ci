@@ -16,8 +16,8 @@ diff_Bk_Bj = binocdf(K-1,n,p)-binocdf(J-1,n,p);
 [j_all,k_all] = find(diff_Bk_Bj >= sigma);
 if (length(j_all) == 0)
     ji = 0;
-	ki = 0;
-	level = 0;
+    ki = 0;
+    level = 0;
     return;
 end
 % Find the minimum interval   
