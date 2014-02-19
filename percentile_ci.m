@@ -1,7 +1,9 @@
 function [ji,ki,level] = percentile_ci(p,sigma,n)
 
 if (n>100)
-    nu = norminv((1+sigma)/2)*sqrt(p*(1-p));
+	% norminv is only available via the statistical toolbox
+    % nu = norminv((1+sigma)/2)*sqrt(p*(1-p));
+	nu = sqrt(2)*erfinv(sigma)*sqrt(p*(1-p));
     ji = floor(n*p-nu*sqrt(n));
     ki = ceil(n*p+nu*sqrt(n));
     level = sigma;
